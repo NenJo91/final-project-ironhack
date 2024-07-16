@@ -4,17 +4,17 @@ It demonstrates how to consume and display data from a Pinia store, and how to c
 -->
 
 <template>
-  <main class="container">
-    <h4>Home View</h4>
+  <main class="min-h-screen flex flex-col items-center py-6 px-4">
+    <h4 class="text-gray-800 text-center text-2xl font-bold py-6">Home View</h4>
 
     <!-- First way of consuming data from the store -->
     <!-- Even though it is accessible, this can be hard to read, so get used to reading -->
-    <p>{{ useCounterStore().count }}</p>
+    <p class="text-gray-600 py-2">{{ useCounterStore().count }}</p>
 
     <!-- Using 2nd way -->
-    <p>{{ countNumber }}</p>
-    <p>{{ doubleCountNumber }}</p>
-    <button @click="incrementNumberFunctionFromStore">Add +1</button>
+    <p class="text-gray-600 py-2">{{ countNumber }}</p>
+    <p class="text-gray-600 py-2">{{ doubleCountNumber }}</p>
+    <button @click="incrementNumberFunctionFromStore" class="btn btn-primary m-6">Add +1</button>
   </main>
 </template>
 

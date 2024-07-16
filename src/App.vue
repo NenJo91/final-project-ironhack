@@ -4,33 +4,31 @@ It manages user authentication states, displays navigation links conditionally b
 -->
 
 <template>
-  <header>
-    <div class="wrapper">
+  <div class="flex flex-col min-h-screen font-Roboto bg-col-primary">
+  <header class="sticky top-0 shadow-lg bg-col-secondary">    
       <!-- Display a welcome message using the HelloWorld component -->
-      <HelloWorld msg="Final Boiler Plate" />
-
+      <HelloWorld msg="Final Ironhack Project" /> 
       <!-- Navigation links -->
-      <nav>
+      <nav class="container flex flex-1 flex-col md:flex-row items-center justify-center gap-4 py-6">
         <template v-if="!isLoggedIn">
           <!-- If the user is not logged in, show these links -->
-          <RouterLink to="/auth/login">Login</RouterLink>
-          <RouterLink to="/auth/register">Register</RouterLink>
+          <RouterLink class="btn btn-warning text-xl" to="/auth/login">Login</RouterLink>
+          <RouterLink class="btn btn-warning text-xl" to="/auth/register">Register</RouterLink>
         </template>
         <template v-else>
           <!-- If the user is logged in, show these links -->
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/all-tasks">All Tasks</RouterLink>
-          <RouterLink to="/completed-tasks">Completed Tasks</RouterLink>
-          <RouterLink to="/add-task">Add New Task</RouterLink>
-          <button @click="handleSignOut">Sign Out</button>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/">Home</RouterLink>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/about">About</RouterLink>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/all-tasks">All Tasks</RouterLink>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/completed-tasks">Completed Tasks</RouterLink>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/add-task">Add New Task</RouterLink>
+          <button class="btn btn-outline btn-warning sm:btn-sm md:btn-md" @click="handleSignOut">Sign Out</button>
         </template>
-      </nav>
-    </div>
+      </nav>  
   </header>
-
   <!-- RouterView to display the current route's component -->
   <RouterView />
+</div>
 </template>
 
 <script setup>
@@ -47,7 +45,7 @@ import { storeToRefs } from "pinia";
 // Import useRouter from vue-router for navigation
 import { useRouter } from "vue-router";
 // Import useUserStore to access user-related data
-import { useUserStore } from "../src/stores/user";
+import { useUserStore } from "./stores/user";
 
 // ------------------------------------------------------------------------
 // Variable Definition Block
@@ -121,3 +119,4 @@ What is storeToRefs?
 In order to extract properties from the store while keeping its reactivity, you need to use storeToRefs(). It will create refs for every reactive property. This is useful when you are only using state from the store but not calling any action. Note you can destructure actions directly from the store as they are bound to the store itself too.
 Link: https://pinia.vuejs.org/core-concepts/
 -->
+

@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.router-link-active {
+    @apply text-purple-500; 
+  }
+  
+  .router-link-exact-active {
+    @apply text-purple-700; 
+  }
+

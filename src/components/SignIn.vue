@@ -4,39 +4,57 @@ By building this component, we will achieve a user interface that allows users t
 -->
 
 <template>
-  <div class="container">
-    <h3 class="header-title">Log In to ToDo App</h3>
-    <!-- FORM GOES HERE -->
-    <form @submit.prevent="signIn">
-      <div class="form">
-        <!-- Email Input -->
-        <label
-          >Email
-          <input id="email" type="text" v-model="formState.email" />
-        </label>
-        <!-- Password Input -->
-        <label
-          >Password
-          <input id="password" type="password" v-model="formState.password" />
-        </label>
-        <!-- Button -->
-        <!-- I personally like semantic elements, I think they are easier to read as an engineer -->
-        <button type="submit">Log In</button>
+  <div class="font-Roboto">
+    <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      <div class="p-8 rounded-2xl shadow-xl">
+        <div class="max-w-md w-96">
+          <h3 class="text-gray-800 text-center text-2xl font-bold">Log In to To-Do App</h3>
+             <!-- FORM GOES HERE -->
+            <form @submit.prevent="signIn" class="mt-8 space-y-6">
+                <!-- Email Input -->
+               <div>
+                <label class="text-gray-800 text-sm mb-2 block"
+                >Email</label>
+                  <div class="relative flex items-center">
+                    <input id="email" type="text" name="username" v-model="formState.email" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-white" placeholder="Enter user name" />            
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
+                        <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                          <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000"></path>
+                      </svg>
+                  </div>
+              </div>
+                <!-- Password Input -->
+              <div>
+                <label class="text-gray-800 text-sm mb-2 block"
+                >Password</label>
+                  <div class="relative flex items-center">
+                    <input id="password" type="password" name="password" v-model="formState.password" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-white" placeholder="Enter password" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-4 h-4 absolute right-4 cursor-pointer" viewBox="0 0 128 128">
+                      <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000"></path>
+                    </svg>
+                  </div>
+              </div>
+                <!-- Button -->
+                 <!-- I personally like semantic elements, I think they are easier to read as an engineer -->
+              <div class="!mt-8">
+                <button type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-col-secondary hover:bg-green-500 focus:outline-none">Sign In</button>
+              </div>
+                <p class="text-gray-800 text-sm !mt-8 text-center">
+                  Don't have an account?
+                  <PersonalRouter
+                    :route="route"
+                    :buttonText="buttonText"
+                    class="text-col-secondary hover:underline ml-1 whitespace-nowrap font-semibold"
+                  />
+                </p>
+            </form>
+                <!-- END FORM -->
+                <!-- Error Message Here -->
+                <p v-show="formState.errorMsg">{{ formState.errorMsg }}</p>
+                <!-- END Error Message -->        
+        </div>
       </div>
-    </form>
-    <!-- END FORM -->
-    <!-- Error Message Here -->
-    <p v-show="formState.errorMsg">{{ formState.errorMsg }}</p>
-    <!-- END Error Message -->
-
-    <p>
-      Don't have an account?
-      <PersonalRouter
-        :route="route"
-        :buttonText="buttonText"
-        class="sign-up-link"
-      />
-    </p>
+    </div>
   </div>
 </template>
 
@@ -57,7 +75,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables for navigating users
 const route = "/auth/register";
-const buttonText = "Sign Up";
+const buttonText = "Register";
 
 // Reactive variable to store email, password, and error messages
 const formState = reactive({
@@ -110,13 +128,4 @@ let signIn = () => {
   */
 </script>
 
-<style scoped>
-label,
-input {
-  display: block;
-}
 
-button {
-  margin: 0.5rem 0;
-}
-</style>

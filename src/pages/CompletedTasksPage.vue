@@ -4,23 +4,25 @@ By building this component, we will achieve a user interface that shows a list o
 -->
 
 <template>
-  <h4>This Page Displays completed tasks</h4>
-  <div class="container">
+    <div class="min-h-screen flex flex-col items-center py-6 px-4">
+      <h4 class="text-gray-800 text-center text-2xl font-bold py-6">This Page Displays completed tasks</h4>
     <!-- Display EXAMPLE TASKS THAT BELONG TO THE USER -->
-    <ul v-if="userCompletedTasks.length > 0">
+    <div class="w-full max-w-4xl">
+    <ul v-if="userCompletedTasks.length > 0" class="space-y-4">
       <!-- Loop through the completedTasks array and render each task -->
-      <li v-for="task in userCompletedTasks" v-bind:key="task.id">
+      <li v-for="task in userCompletedTasks" v-bind:key="task.id" class="bg-white p-4 rounded shadow-md">
         <!-- Display the title of the task -->
-        <h5>{{ task.title }}</h5>
+        <h5 class="text-lg font-semibold text-gray-900">{{ task.title }}</h5>
         <!-- Display the description title of the task -->
-        <h6>{{ task.description.title }}</h6>
+        <h6 class="text-gray-700">{{ task.description.title }}</h6>
         <!-- Display the time to be completed of the task -->
-        <h6>{{ task.description.timeToBeCompleted }}</h6>
+        <h6 class="text-gray-700">{{ task.description.timeToBeCompleted }}</h6>
         <!-- Loop through the extraInfoRequired array and render each item in a list item -->
-        <ul>
+        <ul class="list-disc list-inside mt-2">
           <li
             v-for="(extraInfo, index) in task.description.extraInfoRequired"
             v-bind:key="index"
+            class="text-gray-600"
           >
             {{ extraInfo }}
           </li>
@@ -28,27 +30,29 @@ By building this component, we will achieve a user interface that shows a list o
       </li>
     </ul>
     <!-- Display EXAMPLE TASKS THAT DO NOT BELONG TO THE USER -->
-    <ul v-else>
+    <ul v-else class="space-y-4">
       <!-- Loop through the completedTasks array and render each task -->
-      <li v-for="task in completedTasks" v-bind:key="task.id">
+      <li v-for="task in completedTasks" v-bind:key="task.id" class="bg-white p-4 rounded shadow-md">
         <!-- Display the title of the task -->
-        <h5>{{ task.title }}</h5>
+        <h5 class="text-lg font-semibold text-gray-900">{{ task.title }}</h5>
         <!-- Display the description title of the task -->
-        <h6>{{ task.description.title }}</h6>
+        <h6 class="text-gray-700">{{ task.description.title }}</h6>
         <!-- Display the time to be completed of the task -->
-        <h6>{{ task.description.timeToBeCompleted }}</h6>
+        <h6 class="text-gray-700">{{ task.description.timeToBeCompleted }}</h6>
         <!-- Loop through the extraInfoRequired array and render each item in a list item -->
-        <ul>
+        <ul class="list-disc list-inside mt-2">
           <li
             v-for="(extraInfo, index) in task.description.extraInfoRequired"
             v-bind:key="index"
+            class="text-gray-600"
           >
             {{ extraInfo }}
           </li>
         </ul>
       </li>
     </ul>
-  </div>
+   </div>
+   </div>
 </template>
 
 <script setup>
@@ -121,3 +125,5 @@ const userCompletedTasks = computed(() => {
   - If the user is not logged in, it returns an empty array.
   */
 </script>
+
+

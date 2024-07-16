@@ -4,22 +4,21 @@ By building this component, we will achieve a user interface that allows users t
 -->
 
 <template>
-  <div class="container">
-    <div class="header">
-      <div class="header-description">
-        <h3 class="header-title">Register to ToDo App</h3>
-        <p class="header-subtitle">Start organizing your tasks!</p>
+  <div class="flex flex-col justify-center font-Roboto sm:h-screen p-4">
+    <div class="max-w-md w-full mx-auto shadow-xl rounded-2xl p-8">
+      <div class="text-center mb-12">
+        <h3 class="text-gray-800 text-center text-2xl font-bold">Register to To-Do App</h3>
+        <p class="text-gray-800 text-center text-2xl font-bold">Start organizing your tasks!</p>
       </div>
-    </div>
-
-    <form @submit.prevent="signUp" class="form-sign-in">
-      <div class="form">
+    <form @submit.prevent="signUp">
+      <div class="space-y-6">
         <!-- Email Input Field -->
-        <div class="form-input">
-          <label class="input-field-label">E-mail</label>
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">E-mail</label>
           <input
+            name="email"
             type="email"
-            class="input-field"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
             placeholder="example@gmail.com"
             id="email"
             v-model="formState.email"
@@ -27,11 +26,12 @@ By building this component, we will achieve a user interface that allows users t
           />
         </div>
         <!-- Password Input Field -->
-        <div class="form-input">
-          <label class="input-field-label">Password</label>
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">Password</label>
           <input
+            name="password"
             type="password"
-            class="input-field"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
             placeholder="**********"
             id="password"
             v-model="formState.password"
@@ -39,34 +39,37 @@ By building this component, we will achieve a user interface that allows users t
           />
         </div>
         <!-- Confirm Password Input Field -->
-        <div class="form-input">
-          <label class="input-field-label">Confirm password</label>
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">Confirm password</label>
           <input
+            name="cpassword"
             type="password"
-            class="input-field"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
             placeholder="**********"
             id="confirmPassword"
             v-model="formState.confirmPassword"
             required
           />
         </div>
+        </div>
+        <div class="!mt-12">
         <!-- Sign Up Button -->
-        <button class="button" type="submit">Sign Up</button>
-        <p>
+        <button class="w-full py-3 px-4 text-sm tracking-wider rounded-md text-white bg-col-secondary hover:bg-green-500 focus:outline-none" type="submit">Register</button>
+        </div>
+        <p class="text-gray-800 text-sm mt-6 text-center">
           Have an account?
           <!-- PersonalRouter component for navigation -->
           <PersonalRouter
             :route="goToRoute"
             :buttonText="buttonText"
-            class="sign-up-link"
+            class="text-col-secondary font-semibold hover:underline ml-1"
           />
         </p>
+      </form>
       </div>
-    </form>
-
-    <!-- Display error message if any -->
+    </div>
+      <!-- Display error message if any -->
     <div v-show="formState.errorMsg">{{ formState.errorMsg }}</div>
-  </div>
 </template>
 
 <script setup>
@@ -144,7 +147,3 @@ const signUp = () => {
   - If the passwords do not match, it sets an error message and clears it after 2 seconds.
   */
 </script>
-
-<style>
-/* Style section remains unchanged */
-</style>

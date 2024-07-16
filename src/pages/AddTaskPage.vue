@@ -4,22 +4,23 @@ By building this component, we will achieve a user interface that allows users t
 -->
 
 <template>
-  <div>
-    <h1>Add New Task</h1>
+  <div class="min-h-screen flex flex-col items-center py-6 px-4">
+    <div class="max-w-md w-full mx-auto shadow-xl rounded-2xl p-8">
+    <h1 class="text-gray-800 text-center text-2xl font-bold py-6">Add New Task</h1>
     <!-- v-if directive to show success message if taskAdded is true, otherwise show the form -->
-    <div v-if="taskAdded">
-      <p>Yay! New task created.</p>
-      <button @click="startNewTask">Start a New Task</button>
+    <div class="flex flex-col items-center justify-center py-6" v-if="taskAdded">
+      <p class="text-gray-800 font-bold py-6 mx-auto my-0">Yay! New task created.</p>
+      <button class="mx-auto my-0 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" @click="startNewTask">Start a New Task</button>
     </div>
     <div v-else>
       <form @submit.prevent="handleSubmit">
         <div>
-          <label for="title">Title:</label>
-          <input v-model="newTask.title" type="text" id="title" required />
+          <label class="text-gray-800 font-bold" for="title">Title:</label>
+          <input v-model="newTask.title" type="text" id="title" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4" />
         </div>
         <div>
-          <label for="descriptionTitle">Description Title:</label>
-          <input
+          <label class="text-gray-800 font-bold" for="descriptionTitle">Description Title:</label>
+          <input class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
             v-model="newTask.description.title"
             type="text"
             id="descriptionTitle"
@@ -27,8 +28,8 @@ By building this component, we will achieve a user interface that allows users t
           />
         </div>
         <div>
-          <label for="timeToBeCompleted">Time to be Completed:</label>
-          <input
+          <label class="text-gray-800 font-bold" for="timeToBeCompleted">Time to be Completed:</label>
+          <input class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
             v-model="newTask.description.timeToBeCompleted"
             type="text"
             id="timeToBeCompleted"
@@ -36,25 +37,28 @@ By building this component, we will achieve a user interface that allows users t
           />
         </div>
         <div>
-          <label for="extraInfo">Extra Info Required:</label>
-          <input v-model="newExtraInfo" type="text" id="extraInfo" />
-          <button type="button" @click="addExtraInfo">Add Info</button>
-          <ul>
-            <li
-              v-for="(info, index) in newTask.description.extraInfoRequired"
-              :key="index"
-            >
+          <label class="text-gray-800 font-bold" for="extraInfo">Extra Info Required:</label>
+          <input class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4" v-model="newExtraInfo" type="text" id="extraInfo" />
+            <ul class="flex flex-col items-center">
+              <li class="text-white font-medium flex wrap mb-2"
+                v-for="(info, index) in newTask.description.extraInfoRequired"
+                :key="index"
+              >
               {{ info }}
-              <button type="button" @click="removeExtraInfo(index)">
+              <button class="mx-16 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="button" @click="removeExtraInfo(index)">
                 Remove
               </button>
             </li>
           </ul>
         </div>
-        <button type="submit">Add Task</button>
+        <div class="flex items-center justify-between">
+          <button type="button" @click="addExtraInfo" class="flex-auto text-white bg-gradient-to-r from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-1 mb-2">Add Info</button>
+          <button type="submit" class="flex-auto text-white bg-gradient-to-br from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-1 mb-2">Add Task</button>
+        </div>
       </form>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>

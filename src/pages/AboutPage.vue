@@ -1,7 +1,7 @@
 <template>
-  <main class="container">
-    <h4>About View</h4>
-    <button @click="incrementNumberFunctionFromStore">Add +1</button>
+  <main class="min-h-screen flex flex-col items-center py-6 px-4">
+    <h4 class="text-gray-800 text-center text-2xl font-bold py-6">About View</h4>
+    <button class="btn btn-primary m-6" @click="incrementNumberFunctionFromStore">Add +1</button>
   </main>
 </template>
 

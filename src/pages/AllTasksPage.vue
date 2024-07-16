@@ -5,73 +5,77 @@ allowing users to mark tasks as completed and delete them, leveraging global sta
 -->
 
 <template>
-  <h4>This Page Displays all tasks</h4>
-
-  <div class="container">
+    <div class="min-h-screen flex flex-col items-center py-6 px-4">
+      <h4 class="text-gray-800 text-center text-2xl font-bold py-6">This Page Displays all tasks</h4>
     <!-- Conditional rendering to display user-specific tasks if available, otherwise display all tasks -->
-    <ul v-if="userTasks.length > 0">
+    <div class="w-full max-w-4xl">
+    <ul class="space-y-4" v-if="userTasks.length > 0">
       <!-- v-for directive to iterate over each task in tasks array -->
-      <li v-for="task in userTasks" v-bind:key="task.id">
+      <li v-for="task in userTasks" v-bind:key="task.id" class="bg-white p-4 rounded shadow-md" :class="{ 'line-through text-gray-400': task.isCompleted }">
         <!-- Display the title of the task -->
-        <h5>{{ task.title }}</h5>
+        <h5 class="text-lg font-semibold text-gray-900">{{ task.title }}</h5>
         <!-- Display the description title of the task -->
-        <h6>{{ task.description.title }}</h6>
+        <h6 class="text-gray-700">{{ task.description.title }}</h6>
         <!-- Display the time to be completed of the task -->
-        <h6>{{ task.description.timeToBeCompleted }}</h6>
+        <h6 class="text-gray-700">{{ task.description.timeToBeCompleted }}</h6>
         <!-- Loop through the extraInfoRequired array and render each item in a list item -->
-        <ul>
+        <ul class="list-disc list-inside mt-2">
           <li
             v-for="(extraInfo, index) in task.description.extraInfoRequired"
             v-bind:key="index"
+            class="text-gray-600"
           >
             {{ extraInfo }}
           </li>
         </ul>
         <!-- Display whether the task is completed or incomplete -->
-        <h6>{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
+        <h6 class="mt-2 text-gray-800">{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
         <!-- Button to mark the task as completed -->
-        <button
+        <button class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded disabled:opacity-50" 
           v-bind:disabled="task.isCompleted ? true : false"
           @click="markTaskCompleted(task.id)"
         >
           Mark as Completed
         </button>
         <!-- Button to delete the task -->
-        <button @click="deleteTask(task.id)">Delete Task</button>
+        <button class="mt-2 px-4 py-2 bg-red-500 text-white rounded" @click="deleteTask(task.id)">Delete Task</button>
       </li>
     </ul>
     <!-- Loop through the tasks array and render each task in a list item -->
-    <ul v-else>
+    <ul v-else class="space-y-4">
       <!-- v-for directive to iterate over each task in tasks array -->
-      <li v-for="task in tasks" v-bind:key="task.id">
+      <li v-for="task in tasks" v-bind:key="task.id" class="bg-white p-4 rounded shadow-md" :class="{ 'line-through text-gray-400': task.isCompleted }">
         <!-- Display the title of the task -->
-        <h5>{{ task.title }}</h5>
+        <h5 class="text-lg font-semibold text-gray-900">{{ task.title }}</h5>
         <!-- Display the description title of the task -->
-        <h6>{{ task.description.title }}</h6>
+        <h6 class="text-gray-700">{{ task.description.title }}</h6>
         <!-- Display the time to be completed of the task -->
-        <h6>{{ task.description.timeToBeCompleted }}</h6>
+        <h6 class="text-gray-700">{{ task.description.timeToBeCompleted }}</h6>
         <!-- Loop through the extraInfoRequired array and render each item in a list item -->
-        <ul>
+        <ul class="list-disc list-inside mt-2">
           <li
             v-for="(extraInfo, index) in task.description.extraInfoRequired"
             v-bind:key="index"
+            class="text-gray-600"
           >
             {{ extraInfo }}
           </li>
         </ul>
         <!-- Display whether the task is completed or incomplete -->
-        <h6>{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
+        <h6 class="mt-2 text-gray-800">{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
         <!-- Button to mark the task as completed -->
         <button
           v-bind:disabled="task.isCompleted ? true : false"
           @click="markTaskCompleted(task.id)"
+          class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded disabled:opacity-50"
         >
           Mark as Completed
         </button>
         <!-- Button to delete the task -->
-        <button @click="deleteTask(task.id)">Delete Task</button>
+        <button @click="deleteTask(task.id)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded">Delete Task</button>
       </li>
     </ul>
+   </div>
   </div>
 </template>
 
@@ -109,6 +113,8 @@ const userTasks = computed(() => {
   return []; // If the user is not logged in, return an empty array
 });
 
+   
+
 /*
   The useTaskStore function is used to access the task store.
   - Destructure tasks, markTaskCompleted, deleteTask, and getTasksByUserId from the task store.
@@ -119,12 +125,6 @@ const userTasks = computed(() => {
   */
 </script>
 
-<style scoped>
-button {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-</style>
 
 <!--
 Summary:
@@ -132,3 +132,4 @@ This file implements a Vue.js component that displays a list of tasks from the g
 It allows users to mark tasks as completed or delete them. The component leverages Pinia's state management to
 interact with the tasks and provide necessary functionalities.
 -->
+
