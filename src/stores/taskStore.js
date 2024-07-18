@@ -81,7 +81,7 @@ export const useTaskStore = defineStore("taskStore", () => {
     let task = tasks.find((task) => task.id === taskId);
     // If task is found, mark it as completed
     if (task) {
-      task.isCompleted = true; // Set the task's isCompleted property to true
+      task.isCompleted = !task.isCompleted; // Set the task's isCompleted property to true
     }
   }
 

@@ -27,6 +27,8 @@ By building this component, we will achieve a user interface that shows a list o
             {{ extraInfo }}
           </li>
         </ul>
+        <!-- Display high priority label if applicable -->
+        <h6 v-if="task.description.highPriority" class="mt-2 text-red-500 font-bold">High Priority</h6>
       </li>
     </ul>
     <!-- Display EXAMPLE TASKS THAT DO NOT BELONG TO THE USER -->

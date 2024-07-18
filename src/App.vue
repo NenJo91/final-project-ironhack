@@ -9,7 +9,7 @@ It manages user authentication states, displays navigation links conditionally b
       <!-- Display a welcome message using the HelloWorld component -->
       <HelloWorld msg="Final Ironhack Project" /> 
       <!-- Navigation links -->
-      <nav class="container flex flex-1 flex-col md:flex-row items-center justify-center gap-4 py-6">
+      <nav class="container flex flex-1 flex-col sm:flex-row items-center justify-center gap-4 py-6">
         <template v-if="!isLoggedIn">
           <!-- If the user is not logged in, show these links -->
           <RouterLink class="btn btn-warning text-xl" to="/auth/login">Login</RouterLink>
@@ -19,6 +19,7 @@ It manages user authentication states, displays navigation links conditionally b
           <!-- If the user is logged in, show these links -->
           <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/">Home</RouterLink>
           <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/about">About</RouterLink>
+          <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/profile">Profile</RouterLink>
           <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/all-tasks">All Tasks</RouterLink>
           <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/completed-tasks">Completed Tasks</RouterLink>
           <RouterLink class="btn btn-warning text-xl sm:btn-sm md:btn-md" to="/add-task">Add New Task</RouterLink>
@@ -59,6 +60,7 @@ const userStore = useUserStore();
 const { user, isLoggedIn } = storeToRefs(userStore);
 // Reactive variable to hide/show elements based on user login status
 const isUserloggedIn = ref(false);
+
 
 // ------------------------------------------------------------------------
 // Lifecycle Hook: onMounted

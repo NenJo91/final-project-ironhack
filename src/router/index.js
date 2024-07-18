@@ -10,6 +10,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // Import page components for routing
 import HomePage from "../pages/HomePage.vue";
 import AboutPage from "../pages/AboutPage.vue";
+import ProfilePage from "../pages/ProfilePage.vue"
 import AllTasksPage from "../pages/AllTasksPage.vue";
 import CompletedTasksPage from "../pages/CompletedTasksPage.vue";
 import AddTaskPage from "../pages/AddTaskPage.vue";
@@ -37,6 +38,11 @@ const router = createRouter({
       path: "/about", // Path for the about page
       name: "about", // Name of the route
       component: AboutPage, // Component to render
+    },
+    {
+      path: "/profile", // Path for the about page
+      name: "profile page", // Name of the route
+      component: ProfilePage, // Component to render
     },
     {
       path: "/all-tasks", // Path for the all tasks page

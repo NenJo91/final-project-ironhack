@@ -1,6 +1,9 @@
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts}"],
-  darkMode: false,
+  content: ["./index.html", "./src/**/*.{vue,js,ts}",
+            'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',
+            'node_modules/flowbite/**/*.{js,jsx,ts,tsx}'
+  ],
+  darkMode: true,
   theme: {
     extend: {
       colors:{
@@ -20,5 +23,5 @@ module.exports = {
       }
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui', 'flowbite/plugin')],
 };

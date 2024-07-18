@@ -51,9 +51,10 @@ By building this component, we will achieve a user interface that allows users t
             </li>
           </ul>
         </div>
-        <div class="flex items-center justify-between">
-          <button type="button" @click="addExtraInfo" class="flex-auto text-white bg-gradient-to-r from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-1 mb-2">Add Info</button>
-          <button type="submit" class="flex-auto text-white bg-gradient-to-br from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-1 mb-2">Add Task</button>
+        <button type="button" @click="addExtraInfo" class="w-1/2 md:w-full text-white bg-gradient-to-r from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-1 mb-2">Add Info</button>
+        <div class="flex items-center justify-around pt-4">
+        <fwb-checkbox v-model="newTask.description.highPriority" label="High Priority"/>
+        <button type="submit" class="text-white bg-gradient-to-br from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
         </div>
       </form>
     </div>
@@ -72,6 +73,9 @@ import { reactive, ref } from "vue";
 import { useTaskStore } from "../stores/taskStore";
 // Importing the useUserStore function from userStore to interact with the user store
 import { useUserStore } from "../stores/user";
+
+import { FwbCheckbox } from 'flowbite-vue'
+
 
 // ------------------------------------------------------------------------
 // Store Access Block
@@ -94,6 +98,7 @@ const newTask = reactive({
     title: "", // Detailed description of the new task
     timeToBeCompleted: "", // Time required to complete the new task
     extraInfoRequired: [], // Array for additional information required for the task
+    highPriority: false, // Value of the priority of the task.
   },
 });
 
@@ -112,7 +117,7 @@ const handleSubmit = () => {
   // Use generateTaskForCurrentUser to add the new task for the logged-in user
   taskAdded.value = true;
 };
-
+console.log(taskAdded);
 /*
   The handleSubmit function handles the form submission process.
   - It creates a deep copy of the newTask description object to avoid any reactivity issues.
@@ -153,6 +158,7 @@ const resetForm = () => {
   newTask.description.title = ""; // Clear the description title field
   newTask.description.timeToBeCompleted = ""; // Clear the time to be completed field
   newTask.description.extraInfoRequired = []; // Clear the extra info required array
+  newTask.description.highPriority = false;
 };
 
 /*

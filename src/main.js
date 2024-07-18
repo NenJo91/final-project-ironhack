@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue'
 import './assets/tailwind.css'
 import router from './router'
+import '../node_modules/flowbite-vue/dist/index.css'
 
 library.add(faEdit);
 const app = createApp(App)

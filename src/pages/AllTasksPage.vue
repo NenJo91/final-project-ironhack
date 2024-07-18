@@ -30,21 +30,27 @@ allowing users to mark tasks as completed and delete them, leveraging global sta
         </ul>
         <!-- Display whether the task is completed or incomplete -->
         <h6 class="mt-2 text-gray-800">{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
-        <!-- Button to mark the task as completed -->
-        <button class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded disabled:opacity-50" 
-          v-bind:disabled="task.isCompleted ? true : false"
+        <!-- Display high priority label if applicable -->
+        <h6 v-if="task.description.highPriority" class="mt-2 text-red-500 font-bold">High Priority</h6>
+        <!-- Button to mark the task as completed / incompleted -->
+        <button
           @click="markTaskCompleted(task.id)"
+          class="mt-2 mr-2 px-4 py-2 rounded text-white"
+          :class="task.isCompleted ? 'bg-gray-500' : 'bg-green-500'"
         >
-          Mark as Completed
+          {{ task.isCompleted ? 'Mark as Incomplete' : 'Mark as Completed' }}
         </button>
         <!-- Button to delete the task -->
         <button class="mt-2 px-4 py-2 bg-red-500 text-white rounded" @click="deleteTask(task.id)">Delete Task</button>
-      </li>
+        </li>
     </ul>
     <!-- Loop through the tasks array and render each task in a list item -->
     <ul v-else class="space-y-4">
       <!-- v-for directive to iterate over each task in tasks array -->
-      <li v-for="task in tasks" v-bind:key="task.id" class="bg-white p-4 rounded shadow-md" :class="{ 'line-through text-gray-400': task.isCompleted }">
+      <li v-for="task in tasks" 
+        v-bind:key="task.id" 
+        :class="['bg-white', 'p-4', 'rounded', 'shadow-md', { 'line-through text-gray-400': task.isCompleted,}]"
+        >
         <!-- Display the title of the task -->
         <h5 class="text-lg font-semibold text-gray-900">{{ task.title }}</h5>
         <!-- Display the description title of the task -->
@@ -63,18 +69,24 @@ allowing users to mark tasks as completed and delete them, leveraging global sta
         </ul>
         <!-- Display whether the task is completed or incomplete -->
         <h6 class="mt-2 text-gray-800">{{ task.isCompleted ? "Completed" : "Incomplete" }}</h6>
-        <!-- Button to mark the task as completed -->
+        <!-- Display high priority label if applicable -->
+        <h6 v-if="task.description.highPriority" class="mt-2 text-red-500 font-bold">High Priority!</h6>
+        <!-- Button to mark the task as completed / incompleted -->
         <button
-          v-bind:disabled="task.isCompleted ? true : false"
           @click="markTaskCompleted(task.id)"
-          class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded disabled:opacity-50"
+          class="mt-2 mr-2 px-4 py-2 rounded text-white"
+          :class="task.isCompleted ? 'bg-gray-500' : 'bg-green-500'"
         >
-          Mark as Completed
+          {{ task.isCompleted ? 'Mark as Incomplete' : 'Mark as Completed' }}
         </button>
+
         <!-- Button to delete the task -->
         <button @click="deleteTask(task.id)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded">Delete Task</button>
       </li>
     </ul>
+    <div v-if="tasks.length === 0" class="text-center mt-3 text-red-800 font-semibold">
+        <p>No tasks found !</p>
+    </div>
    </div>
   </div>
 </template>
@@ -99,10 +111,14 @@ const taskstore = useTaskStore();
 // Use the user store by saving it in a variable
 const userStore = useUserStore();
 
+
+
 // Destructure all the possible pieces of data that we want out of this
 const { tasks, deleteTask, markTaskCompleted, getTasksByUserId } = taskstore; // Destructure necessary functions and state from the task store
 
 // Functions Block
+
+
 // Let's generate a function that uses a computed property to get tasks for the current user. Given that I want to use this function inside the template. I will be storing this function as a function expresseion. AKA, store in a variable.
 const userTasks = computed(() => {
   // Let's condition if we have an user that is loggedIN and if we have a value for the reactive user variable inside the usrStore.
