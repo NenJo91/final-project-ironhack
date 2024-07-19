@@ -34,6 +34,7 @@ export const useTaskStore = defineStore("taskStore", () => {
         extraInfoRequired: ["Guacamole", "Nachos"], // Additional information required for the task
       },
       isCompleted: true, // Boolean indicating if the task is completed
+      highPriority: false, // Boolean indicating if the task has high priority to be done
       userId: 1, // Link task to user with id 1
     },
     {
@@ -45,6 +46,7 @@ export const useTaskStore = defineStore("taskStore", () => {
         extraInfoRequired: ["swap", "mop", "dust"], // Additional information required for the task
       },
       isCompleted: false, // Boolean indicating if the task is completed
+      highPriority: false, // Boolean indicating if the task has high priority to be done
       userId: 2, // Link task to user with id 2
     },
   ]);
@@ -67,6 +69,37 @@ export const useTaskStore = defineStore("taskStore", () => {
   - It uses the push method to add this task object to the end of the tasks array.
   - Since tasks is a reactive array, any components that are using this store will automatically reflect this new task.
   */
+
+
+//   // State for sorting the tasks
+// const sortBy = ref("");
+
+// // Computed property to sort tasks by priority and status
+// const sortedTasks = computed(() => {
+//   const sorted = [...tasks.value];
+//   if (sortBy.value === "priority") {
+//     return sorted.sort((a, b) => b.description.highPriority - a.description.highPriority);
+//   }
+//   if (sortBy.value === "status") {
+//     return sorted.sort((a, b) => a.isCompleted - b.isCompleted);
+//   }
+//   return sorted;
+// });
+
+// const sortedUserTasks = computed(() => {
+//   const sorted = [...userTasks.value];
+//   if (sortBy.value === "priority") {
+//     return sorted.sort((a, b) => b.description.highPriority - a.description.highPriority);
+//   }
+//   if (sortBy.value === "status") {
+//     return sorted.sort((a, b) => a.isCompleted - b.isCompleted);
+//   }
+//   return sorted;
+// });
+
+// const sortTasks = (criteria) => {
+//   sortBy.value = criteria;
+// };
 
   // ----------------------------------------------------------------------
   // Function to mark a task as completed
@@ -116,6 +149,17 @@ export const useTaskStore = defineStore("taskStore", () => {
   - If a task with the specified id is found (index is not -1), it removes the task from the array using the splice method.
   - This function allows for deleting tasks by their unique identifier.
   */
+
+  function updateTask(taskId, updatedTask) {
+    let task = tasks.find((task) => task.id === taskId);
+    if (task) {
+      task.title = updatedTask.title;
+      task.description.title = updatedTask.description.title;
+      task.description.timeToBeCompleted = updatedTask.description.timeToBeCompleted;
+      task.description.extraInfoRequired = updatedTask.description.extraInfoRequired;
+    }
+  }
+
 
   // ----------------------------------------------------------------------
   // Function to get tasks by user ID
@@ -184,6 +228,7 @@ throws an error.
     addTask,
     markTaskCompleted,
     deleteTask,
+    updateTask,
     getTasksByUserId,
     generateTaskForCurrentUser,
   };

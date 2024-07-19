@@ -54,7 +54,7 @@ By building this component, we will achieve a user interface that allows users t
         </div>
         <div class="!mt-12">
         <!-- Sign Up Button -->
-        <button class="w-full py-3 px-4 text-sm tracking-wider rounded-md text-white bg-col-secondary hover:bg-green-500 focus:outline-none" type="submit">Register</button>
+        <button class="w-full py-3 px-4 text-sm tracking-wider rounded-md text-white font-semibold bg-col-secondary hover:bg-green-500 focus:outline-none" type="submit">Register</button>
         </div>
         <p class="text-gray-800 text-sm mt-6 text-center">
           Have an account?
@@ -62,7 +62,7 @@ By building this component, we will achieve a user interface that allows users t
           <PersonalRouter
             :route="goToRoute"
             :buttonText="buttonText"
-            class="text-col-secondary font-semibold hover:underline ml-1"
+            class="text-col-secondary font-semibold hover:underline ml-1 dark:text-white"
           />
         </p>
       </form>

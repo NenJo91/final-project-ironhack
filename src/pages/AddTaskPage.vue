@@ -51,7 +51,14 @@ By building this component, we will achieve a user interface that allows users t
             </li>
           </ul>
         </div>
-        <button type="button" @click="addExtraInfo" class="w-1/2 md:w-full text-white bg-gradient-to-r from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-1 mb-2">Add Info</button>
+        <div class="flex items-center justify-around pt-4 mb-4">
+          <fwb-select
+          v-model="dueDay"
+          :options="days"
+          label="Add due day"
+        />
+        <button type="button" @click="addExtraInfo" class="self-end text-white bg-gradient-to-r from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Info</button>
+        </div>
         <div class="flex items-center justify-around pt-4">
         <fwb-checkbox v-model="newTask.description.highPriority" label="High Priority"/>
         <button type="submit" class="text-white bg-gradient-to-br from-col-secondary to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Task</button>
@@ -68,13 +75,17 @@ By building this component, we will achieve a user interface that allows users t
 // ------------------------------------------------------------------------
 
 // Importing reactive and ref from Vue for reactivity and references
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 // Importing the useTaskStore function from taskStore to interact with the task store
 import { useTaskStore } from "../stores/taskStore";
 // Importing the useUserStore function from userStore to interact with the user store
 import { useUserStore } from "../stores/user";
 
 import { FwbCheckbox } from 'flowbite-vue'
+import { FwbSelect } from 'flowbite-vue'
+
+
+
 
 
 // ------------------------------------------------------------------------
@@ -99,15 +110,31 @@ const newTask = reactive({
     timeToBeCompleted: "", // Time required to complete the new task
     extraInfoRequired: [], // Array for additional information required for the task
     highPriority: false, // Value of the priority of the task.
+    dueDay: "" // Due day for the task to be completed
   },
 });
+const days = [
+  { value: 'Monday', name: 'Monday' },
+  { value: 'Tuesday', name: 'Tuesday' },
+  { value: 'Wednesday', name: 'Wednesday' },
+  { value: 'Thursday', name: 'Thursday' },
+  { value: 'Friday', name: 'Friday' },
+  { value: 'Saturday', name: 'Saturday' },
+  { value: 'Sunday', name: 'Sunday' },
+]
 
+const dueDay = ref(""); // Reactive reference for due day
 const newExtraInfo = ref(""); // Reference for new extra info input
 const taskAdded = ref(false); // Reference for tracking if a task has been added
 
 // ------------------------------------------------------------------------
 // Methods Block
 // ------------------------------------------------------------------------
+
+// Watcher to sync dueDay with newTask.description.dueDay
+watch(dueDay, (newVal) => {
+  newTask.description.dueDay = newVal;
+});
 
 // Function to handle form submission
 const handleSubmit = () => {
@@ -158,7 +185,8 @@ const resetForm = () => {
   newTask.description.title = ""; // Clear the description title field
   newTask.description.timeToBeCompleted = ""; // Clear the time to be completed field
   newTask.description.extraInfoRequired = []; // Clear the extra info required array
-  newTask.description.highPriority = false;
+  newTask.description.highPriority = false; // Set the priority back to unchecked
+  dueDay.value = "" // Remove the value of due day.
 };
 
 /*

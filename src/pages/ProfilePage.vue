@@ -61,5 +61,16 @@
 
 <script setup>
 import { FwbButton } from 'flowbite-vue'
+// Import reactive from Vue to make the tasks array reactive
+import { reactive } from "vue";
+// Import the useTaskStore function from taskStore to interact with the task store
+import { useTaskStore } from "../stores/taskStore";
+// Import useUserStore to access the currently logged-in user
+import { useUserStore } from "../stores/user";
+
+// Use the task store by saving it in a variable
+const taskstore = useTaskStore();
+// Use the user store by saving it in a variable
+const userStore = useUserStore();
 
 </script>
