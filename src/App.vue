@@ -38,7 +38,7 @@ It manages user authentication states, displays navigation links conditionally b
         </svg>
       </label> 
       <!-- Navigation links -->
-      <nav class="container flex flex-1 flex-wrap sm:flex-nowrap  items-center justify-center gap-4 py-6">
+      <nav class="container flex flex-1 flex-wrap sm:flex-nowrap md:gap-4 items-center justify-center gap-1 py-6">
         <template v-if="!isLoggedIn">
           <!-- If the user is not logged in, show these links -->
           <RouterLink class="btn btn-warning text-xl" to="/auth/login">Login</RouterLink>
